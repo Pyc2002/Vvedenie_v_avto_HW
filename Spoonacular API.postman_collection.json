@@ -1,0 +1,1507 @@
+{
+	"info": {
+		"_postman_id": "1d0606ba-378b-4df2-8abb-ded39d1922a6",
+		"name": "Spoonacular API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27938314"
+	},
+	"item": [
+		{
+			"name": "Search Recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check number of reciepes on page\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.results.length).to.eql(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check title\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.results[0].title).to.include(\"Pasta\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"complexSearch"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "pasta"
+						},
+						{
+							"key": "maxFat",
+							"value": "25"
+						},
+						{
+							"key": "number",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Recipes by Ingredients",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"apple\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+sugar&number=3",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"findByIngredients"
+					],
+					"query": [
+						{
+							"key": "ingredients",
+							"value": "apples,+sugar"
+						},
+						{
+							"key": "number",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Ingredients",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check number of reciepes on page\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.results.length).to.eql(3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains 'apple' 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.results[0].name).to.include(\"apple\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains 'apple' 2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.results[1].name).to.include(\"apple\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains 'apple' 3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.results[2].name).to.include(\"apple\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spoonacular.com/food/ingredients/search?query=apple&number=3&sort=calories&sortDirection=desc",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"ingredients",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "apple"
+						},
+						{
+							"key": "number",
+							"value": "3"
+						},
+						{
+							"key": "sort",
+							"value": "calories"
+						},
+						{
+							"key": "sortDirection",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Similar Recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Dinner Tonight\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check number of reciepes on page\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.length).to.eql(2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/715538/similar?number=2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"715538",
+						"similar"
+					],
+					"query": [
+						{
+							"key": "number",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ingredient Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(9266);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check amount\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.amount).to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spoonacular.com/food/ingredients/9266/information?amount=3",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"ingredients",
+						"9266",
+						"information"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parse Ingredients",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains '1 tablespoon Capers'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0].original).to.eql(\"1 tablespoon Capers\");\r",
+							"    pm.expect(jsonData[0].name).to.eql(\"capers\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ingredientList",
+							"value": "1 tablespoon Capers",
+							"type": "text"
+						},
+						{
+							"key": "servings",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "includeNutrition",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/parseIngredients",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"parseIngredients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Menu Items",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check number of reciepes on page\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.menuItems.length).to.eql(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains 'Burger' 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.menuItems[0].title).to.include(\"Burger\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains 'Burger' 2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.menuItems[1].title).to.include(\"Burger\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spoonacular.com/food/menuItems/search?query=burger&number=2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"menuItems",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "burger"
+						},
+						{
+							"key": "number",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Random Recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"test for vegetarian\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.recipes[0].vegetarian).to.eql(true);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/random?number=2&tags=vegetarian",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"random"
+					],
+					"query": [
+						{
+							"key": "number",
+							"value": "2"
+						},
+						{
+							"key": "tags",
+							"value": "vegetarian"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convert Amounts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check message\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.answer).to.eql(\"2.5 cups flour are 312.5 grams.\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check equal\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.sourceAmount).to.eql(2.5);\r",
+							"pm.expect(jsonData.targetAmount).to.eql(312.5);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/convert?ingredientName=flour&sourceAmount=2.5&sourceUnit=cups&targetUnit=grams",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"convert"
+					],
+					"query": [
+						{
+							"key": "ingredientName",
+							"value": "flour"
+						},
+						{
+							"key": "sourceAmount",
+							"value": "2.5"
+						},
+						{
+							"key": "sourceUnit",
+							"value": "cups"
+						},
+						{
+							"key": "targetUnit",
+							"value": "grams"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check id, title\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.id).to.eql(22347);\r",
+							"pm.expect(jsonData.title).to.eql(\"SNICKERS Minis Size Chocolate Candy Bars Variety Mix 10.5-oz. Bag\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/food/products/22347",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"products",
+						"22347"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Classify Cuisine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"cuisine test\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.cuisine).to.eql(\"Mediterranean\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Slow Cooked Applesauce",
+							"type": "text"
+						},
+						{
+							"key": "ingredientList",
+							"value": "apples from a local tree if possible",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/cuisine",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"cuisine"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Extract Recipe from Website",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check url\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.sourceUrl).to.eql(\"https://foodista.com/recipe/ZHK4KPB6/chocolate-crinkle-cookies\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/extract?url=https://foodista.com/recipe/ZHK4KPB6/chocolate-crinkle-cookies",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"extract"
+					],
+					"query": [
+						{
+							"key": "url",
+							"value": "https://foodista.com/recipe/ZHK4KPB6/chocolate-crinkle-cookies"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Analyzed Recipe Instructions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/recipes/324694/analyzedInstructions",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"recipes",
+						"324694",
+						"analyzedInstructions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Autocomplete Ingredient Search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"check number of results\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.length).to.eql(5);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/food/ingredients/autocomplete?query=carrot&number=5",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"ingredients",
+						"autocomplete"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "carrot"
+						},
+						{
+							"key": "number",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ingredient Substitutes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check equal\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.ingredient).to.eql(\"butter\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/food/ingredients/substitutes?ingredientName=butter",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"ingredients",
+						"substitutes"
+					],
+					"query": [
+						{
+							"key": "ingredientName",
+							"value": "butter"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Comparable Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/food/products/upc/033698816271/comparable",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"products",
+						"upc",
+						"033698816271",
+						"comparable"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Meal Plan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/mealplanner/generate?timeFrame=day",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"mealplanner",
+						"generate"
+					],
+					"query": [
+						{
+							"key": "timeFrame",
+							"value": "day"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Grocery Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check number of reciepes on page\", function () {\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.products.length).to.eql(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains 'pizza'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.products[0].title).to.include(\"pizza\");\r",
+							"    pm.expect(jsonData.products[1].title).to.include(\"pizza\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/food/products/search?query=pizza&number=2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"products",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "pizza"
+						},
+						{
+							"key": "number",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dish Pairing for Wine",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains 'malbec'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.text).to.include(\"Malbec\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/food/wine/dishes?wine=malbec",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"wine",
+						"dishes"
+					],
+					"query": [
+						{
+							"key": "wine",
+							"value": "malbec"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wine Description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Contains 'merlot'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.wineDescription).to.include(\"Merlot\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{value}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://api.spoonacular.com/food/wine/description?wine=merlot",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spoonacular",
+						"com"
+					],
+					"path": [
+						"food",
+						"wine",
+						"description"
+					],
+					"query": [
+						{
+							"key": "wine",
+							"value": "merlot"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
