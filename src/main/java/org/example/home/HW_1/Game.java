@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.home.HW_1;
 
 import java.util.ArrayList;
 import java.util.List;
