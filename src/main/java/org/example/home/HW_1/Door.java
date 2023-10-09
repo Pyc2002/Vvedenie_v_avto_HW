@@ -1,4 +1,4 @@
-package org.example.home;
+package org.example.home.HW_1;
 
 /**
  * Класс для описание двери

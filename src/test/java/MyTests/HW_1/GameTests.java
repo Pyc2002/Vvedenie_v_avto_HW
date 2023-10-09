@@ -1,13 +1,12 @@
-package MyTests;
+package MyTests.HW_1;
 
-import org.example.home.*;
+import org.example.home.HW_1.Door;
+import org.example.home.HW_1.Game;
+import org.example.home.HW_1.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
