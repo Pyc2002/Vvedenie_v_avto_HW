@@ -5,24 +5,23 @@ package HW_3;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.*;
 
-public class SpoonacularAPITest {
-    private String apiKey = "37c3e5cb47ff414bbdd9fd553add7921";
+public class SpoonacularAPITest extends SpoonacularAbstractTest{
+//    private String apiKey = "37c3e5cb47ff414bbdd9fd553add7921";
 
     @Test
     void searchRecipesTest() {
         given()
-                .queryParam("apiKey", apiKey)
+                .queryParam("apiKey", getApiKey())
                 .queryParam("query", "pasta")
                 .queryParam("maxFat", 25)
                 .queryParam("number", 2)
                 .when()
-                .get("https://api.spoonacular.com/recipes/complexSearch")
+                .get(getBaseUrl() + "/recipes/complexSearch")
                 .prettyPeek()
                 .then()
                 .body("results[0].title", containsString("Pasta"))
@@ -39,13 +38,13 @@ public class SpoonacularAPITest {
     @Test
     void searchRecipesByIngredientsTest() {
         given()
-                .queryParam("apiKey", apiKey)
+                .queryParam("apiKey", getApiKey())
                 .queryParam("ingredients", "apples")
                 .queryParam("ingredients", "flour")
                 .queryParam("ingredients", "sugar")
                 .queryParam("number", 2)
                 .when()
-                .get("https://api.spoonacular.com/recipes/findByIngredients")
+                .get(getBaseUrl() + "recipes/findByIngredients")
                 .prettyPeek()
                 .then()
                 .body("title.toString()", containsString("Apple"))
@@ -56,13 +55,13 @@ public class SpoonacularAPITest {
     @Test
     void searchIngredientsTest() {
          given()
-                .queryParam("apiKey", apiKey)
+                 .queryParam("apiKey", getApiKey())
                 .queryParam("query", "banana")
                 .queryParam("sort", "calories")
                 .queryParam("sortDirection", "desc")
                 .queryParam("number", 3)
                 .when()
-                .get("https://api.spoonacular.com/food/ingredients/search")
+                .get(getBaseUrl() + "food/ingredients/search")
                 .prettyPeek()
                 .then()
                 .body("results[0].name", containsString("banana"))
@@ -76,11 +75,11 @@ public class SpoonacularAPITest {
     @Test
     void getSimilarRecipesTest() {
         given()
-                .queryParam("apiKey", apiKey)
+                .queryParam("apiKey", getApiKey())
                 .queryParam("number", 2)
                 .pathParam("id", 715538)
                 .when()
-                .get("https://api.spoonacular.com/recipes/{id}/similar")
+                .get(getBaseUrl() + "recipes/{id}/similar")
                 .prettyPeek()
                 .then()
                 .body("[0].title", containsString("Dinner Tonight"))
@@ -93,11 +92,11 @@ public class SpoonacularAPITest {
     @Test
     void classifyCuisinePOSTTest() {
         given()
-                .queryParam("apiKey", apiKey)
+                .queryParam("apiKey", getApiKey())
                 .when()
                 .formParam("title", "Slow Cooked Applesauce")
                 .formParam("ingredientList", "apples from a local tree if possible")
-                .post("https://api.spoonacular.com/recipes/cuisine")
+                .post(getBaseUrl() + "recipes/cuisine")
                 .prettyPeek()
                 .then()
                 .body("cuisine", equalTo("Mediterranean"))
@@ -108,10 +107,10 @@ public class SpoonacularAPITest {
     @Test
     void dishPairingForWineTest() {
         given()
-                .queryParam("apiKey", apiKey)
+                .queryParam("apiKey", getApiKey())
                 .queryParam("wine", "Merlot")
                 .when()
-                .get("https://api.spoonacular.com/food/wine/dishes")
+                .get(getBaseUrl() + "food/wine/dishes")
                 .prettyPeek()
                 .then()
                 .body("text", containsString("Merlot"))
@@ -122,12 +121,12 @@ public class SpoonacularAPITest {
     @Test
     void parseIngredientsPOSTTest() {
         given()
-                .queryParam("apiKey", apiKey)
+                .queryParam("apiKey", getApiKey())
                 .when()
                 .formParam("ingredientList", "1 tablespoon Capers")
                 .formParam("servings", 1)
                 .formParam("includeNutrition", true)
-                .post("https://api.spoonacular.com/recipes/parseIngredients")
+                .post(getBaseUrl() + "recipes/parseIngredients")
                 .prettyPeek()
                 .then()
                 .body("[0].original", equalTo("1 tablespoon Capers"))
@@ -139,11 +138,11 @@ public class SpoonacularAPITest {
     @Test
     void getIngredientInformationTest() {
         given()
-                .queryParam("apiKey", apiKey)
+                .queryParam("apiKey", getApiKey())
                 .queryParam("amount", 3)
                 .pathParam("id", 9266)
                 .when()
-                .get("https://api.spoonacular.com/food/ingredients/{id}/information")
+                .get(getBaseUrl() + "food/ingredients/{id}/information")
                 .prettyPeek()
                 .then()
                 .body("id", is(9266))
