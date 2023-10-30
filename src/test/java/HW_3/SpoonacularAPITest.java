@@ -21,7 +21,7 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
                 .queryParam("maxFat", 25)
                 .queryParam("number", 2)
                 .when()
-                .get(getBaseUrl() + "/recipes/complexSearch")
+                .get(getBaseUrl() + "recipes/complexSearch")
                 .prettyPeek()
                 .then()
                 .body("results[0].title", containsString("Pasta"))
