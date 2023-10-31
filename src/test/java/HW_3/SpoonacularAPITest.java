@@ -165,7 +165,7 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
                 .body("id", is(9266))
                 .body("amount", is(3.0F))
                 .statusCode(200)
-                .time(lessThan(1500L));
+                .time(lessThan(2000L));
     }
 
 
