@@ -1,7 +1,6 @@
 package HW_3;
 
-
-
+import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
@@ -10,10 +9,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.*;
 
+@Epic(value = "Тестирование REST API")
+@Feature(value = "Third HomeWork")
 public class SpoonacularAPITest extends SpoonacularAbstractTest{
 //    private String apiKey = "37c3e5cb47ff414bbdd9fd553add7921";
 
     @Test
+    @Description("search recipes GET")
+    @Severity(SeverityLevel.NORMAL)
     void searchRecipesTest() {
         given()
                 .queryParam("apiKey", getApiKey())
@@ -36,6 +39,8 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
     }
 
     @Test
+    @Description("search recipes by ingredients GET")
+    @Severity(SeverityLevel.NORMAL)
     void searchRecipesByIngredientsTest() {
         given()
                 .queryParam("apiKey", getApiKey())
@@ -53,6 +58,8 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
                 .time(lessThan(1500L));
     }
     @Test
+    @Description("search ingredients GET")
+    @Severity(SeverityLevel.NORMAL)
     void searchIngredientsTest() {
          given()
                  .queryParam("apiKey", getApiKey())
@@ -73,6 +80,8 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
     }
 
     @Test
+    @Description("search recipes by ingredients GET")
+    @Severity(SeverityLevel.NORMAL)
     void getSimilarRecipesTest() {
         given()
                 .queryParam("apiKey", getApiKey())
@@ -90,6 +99,8 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
     }
 
     @Test
+    @Description("classify cuisine POST")
+    @Severity(SeverityLevel.NORMAL)
     void classifyCuisinePOSTTest() {
         given()
                 .queryParam("apiKey", getApiKey())
@@ -105,6 +116,8 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
     }
 
     @Test
+    @Description("dish pairing for wine GET")
+    @Severity(SeverityLevel.NORMAL)
     void dishPairingForWineTest() {
         given()
                 .queryParam("apiKey", getApiKey())
@@ -119,6 +132,8 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
     }
 
     @Test
+    @Description("parse ingredients POST")
+    @Severity(SeverityLevel.NORMAL)
     void parseIngredientsPOSTTest() {
         given()
                 .queryParam("apiKey", getApiKey())
@@ -136,6 +151,8 @@ public class SpoonacularAPITest extends SpoonacularAbstractTest{
     }
 
     @Test
+    @Description("ingredient information GET")
+    @Severity(SeverityLevel.NORMAL)
     void getIngredientInformationTest() {
         given()
                 .queryParam("apiKey", getApiKey())

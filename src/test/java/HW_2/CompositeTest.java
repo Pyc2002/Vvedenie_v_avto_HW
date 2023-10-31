@@ -1,6 +1,8 @@
 package HW_2;
 
+import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Epic(value = "Тесты паттерна Компоновщик")
+@Feature(value = "Second HomeWork")
 public class CompositeTest {
     ProductGroup engineParts;
     ProductGroup carBody;
@@ -45,6 +49,8 @@ public class CompositeTest {
     }
 
     @Test
+    @Description("total price of engine parts")
+    @Severity(SeverityLevel.NORMAL)
     void enginePartsTotalPriceTest(){
         double totalPrice = engineParts.getPrice();
 
@@ -52,12 +58,16 @@ public class CompositeTest {
     }
 
     @Test
+    @Description("total price")
+    @Severity(SeverityLevel.NORMAL)
     void allTotalPriceTest(){
         double totalPrice = engineParts.getPrice() + carBody.getPrice();
 
         assertEquals(35000, totalPrice);
     }
     @Test
+    @Description("mixed total price")
+    @Severity(SeverityLevel.NORMAL)
     void mixedTotalPrice(){
         double totalPrice = engineParts.getPrice() + bumper.getPrice();
 
@@ -66,6 +76,8 @@ public class CompositeTest {
     }
 
     @Test
+    @Description("remove parts")
+    @Severity(SeverityLevel.NORMAL)
     void removeTest(){
         engineParts.removeItem(valve);
 

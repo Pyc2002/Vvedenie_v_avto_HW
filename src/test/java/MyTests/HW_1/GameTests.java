@@ -1,9 +1,11 @@
 package MyTests.HW_1;
 
+import io.qameta.allure.*;
 import org.example.home.HW_1.Door;
 import org.example.home.HW_1.Game;
 import org.example.home.HW_1.Player;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,6 +13,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Epic(value = "Тестирование игры с парадоксом Монти Холла")
+@Feature(value = "First HomeWork")
 public class GameTests {
     private List<Door> listDoors;
 
@@ -23,6 +27,8 @@ public class GameTests {
         listDoors.add(new Door(true));
     }
     @Test
+    @Description("remove door")
+    @Severity(SeverityLevel.NORMAL)
     void removeDoorTest(){
         Game game = new Game(new Player("Player", true),listDoors);
 
@@ -35,6 +41,8 @@ public class GameTests {
     }
 
     @Test
+    @Description("win with risk Test")
+    @Severity(SeverityLevel.NORMAL)
     void riskTrueWinTest(){
         Game game = new Game(new Player("Player", true),listDoors);
 
@@ -44,6 +52,8 @@ public class GameTests {
     }
 
     @Test
+    @Description("win without risk Test")
+    @Severity(SeverityLevel.NORMAL)
     void riskFalseWinTest(){
         Game game = new Game(new Player("Player", false),listDoors);
 
@@ -53,6 +63,8 @@ public class GameTests {
     }
 
     @Test
+    @Description("lose without risk Test")
+    @Severity(SeverityLevel.NORMAL)
     void riskFalseLoseTest(){
         Game game = new Game(new Player("Player", false),listDoors);
 
@@ -62,6 +74,8 @@ public class GameTests {
     }
 
     @Test
+    @Description("lose with risk Test")
+    @Severity(SeverityLevel.NORMAL)
     void riskTrueLoseTest(){
         Game game = new Game(new Player("Player", true),listDoors);
 

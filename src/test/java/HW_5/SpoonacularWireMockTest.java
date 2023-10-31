@@ -1,6 +1,7 @@
 package HW_5;
 
 
+import io.qameta.allure.*;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -17,11 +18,14 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@Epic(value = "WireMock и логи")
+@Feature(value = "Fifth HomeWork")
 public class SpoonacularWireMockTest extends AbstractTest{
     private static final Logger logger
             = LoggerFactory.getLogger(SpoonacularWireMockTest.class);
     @Test
+    @Description("search recipes GET")
+    @Severity(SeverityLevel.NORMAL)
     void searchRecipesTest() throws IOException{
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для GET /recipes/complexSearch");
@@ -52,6 +56,8 @@ public class SpoonacularWireMockTest extends AbstractTest{
     }
 
     @Test
+    @Description("search recipes by ingredients GET")
+    @Severity(SeverityLevel.NORMAL)
     void searchRecipesByIngredientsTest() {
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для GET /recipes/findByIngredients");
@@ -73,6 +79,8 @@ public class SpoonacularWireMockTest extends AbstractTest{
     }
 
     @Test
+    @Description("search ingredients GET")
+    @Severity(SeverityLevel.NORMAL)
     void searchIngredientsTest() throws IOException {
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для GET /food/ingredients/search");
@@ -96,6 +104,8 @@ public class SpoonacularWireMockTest extends AbstractTest{
     }
 
     @Test
+    @Description("similar Recipes GET")
+    @Severity(SeverityLevel.NORMAL)
     void getSimilarRecipesTest() {
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для GET /recipes/715538/similar");
@@ -118,7 +128,9 @@ public class SpoonacularWireMockTest extends AbstractTest{
     }
 
     @Test
-    void testBodyMatching() throws IOException {
+    @Description("classify cuisine POST")
+    @Severity(SeverityLevel.NORMAL)
+    void classifyCuisinePOSTTest() throws IOException {
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для POST recipes/cuisine");
         //given
@@ -143,6 +155,8 @@ public class SpoonacularWireMockTest extends AbstractTest{
         assertEquals("Slow Cooked Applesauce", stringResponse);
     }
     @Test
+    @Description("dish pairing for wine GET")
+    @Severity(SeverityLevel.NORMAL)
     void dishPairingForWineTest() {
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для GET /food/wine/dishes");
@@ -170,7 +184,9 @@ public class SpoonacularWireMockTest extends AbstractTest{
     }
 
     @Test
-    void parseIngredientsPOSTGivenTest() {
+    @Description("parse ingredients POST Given()")
+    @Severity(SeverityLevel.NORMAL)
+    void parseIngredientsPOSTTest() {
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для POST /recipes/parseIngredients");
 
@@ -187,6 +203,8 @@ public class SpoonacularWireMockTest extends AbstractTest{
                 .body(containsString("tablespoon"));
     }
     @Test
+    @Description("parse ingredients POST HTTP")
+    @Severity(SeverityLevel.NORMAL)
     void parseIngredientsHTTPPOSTTest() throws IOException {
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для POST /recipes/parseIngredients");
@@ -212,6 +230,8 @@ public class SpoonacularWireMockTest extends AbstractTest{
         assertEquals("\"unit\": \"tablespoon\"", stringResponse);
     }
     @Test
+    @Description("ingredient information GET")
+    @Severity(SeverityLevel.NORMAL)
     void getIngredientInformationTest() {
         logger.info("Тест код ответ 200 запущен");
         logger.debug("Формирование мока для GET /food/ingredients/9266/information");

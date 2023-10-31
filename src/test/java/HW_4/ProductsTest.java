@@ -1,5 +1,6 @@
 package HW_4;
 
+import io.qameta.allure.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.junit.jupiter.api.Assertions;
@@ -14,9 +15,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Optional;
 
+@Epic(value = "Применение SQL")
+@Feature(value = "Fourth HomeWork")
 public class ProductsTest extends AbstractTest {
 
     @Test
+    @Description("get product")
+    @Severity(SeverityLevel.NORMAL)
     @Order(1)
     void getProductTest() throws SQLException {
         //given
@@ -34,8 +39,11 @@ public class ProductsTest extends AbstractTest {
         Assertions.assertEquals(5, query.list().size());
     }
 
-    @Order(2)
+
     @ParameterizedTest
+    @Order(2)
+    @Description("get products by manufacturer")
+    @Severity(SeverityLevel.NORMAL)
     @CsvSource({"телевизор, 50", "холодильник, 25", "пылесос, 30"})
     void getProductsByManufacturerTest(String product_name, int product_quantity) throws SQLException {
         //given
@@ -56,6 +64,8 @@ public class ProductsTest extends AbstractTest {
 
     @Test
     @Order(3)
+    @Description("add product")
+    @Severity(SeverityLevel.NORMAL)
     void addProductTest() {
         //given
         ProductsEntity entity = new ProductsEntity();
@@ -82,6 +92,8 @@ public class ProductsTest extends AbstractTest {
     }
     @Test
     @Order(4)
+    @Description("delete product")
+    @Severity(SeverityLevel.NORMAL)
     void deleteProductTest() {
         //given
         final Query query = getSession()
